@@ -23,7 +23,7 @@ class NewsController extends ControllerBase{
 
         $paginator = new Model(array(
             "data" => $model,
-            "limit" => 5,
+            "limit" => 10,
             "page" => $numberPage
         ));
         $page = $paginator->getPaginate();

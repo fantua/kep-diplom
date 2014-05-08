@@ -1,6 +1,6 @@
 {{ content() }}
 
-<p style="float: right"><a href="/admin/news/add" class="btn btn-primary btn-sm" role="button">Додати сторінку</a></p>
+<p style="float: right"><a href="/admin/pages/add" class="btn btn-primary btn-sm" role="button">Додати сторінку</a></p>
 
 {% for model in page.items %}
 {% if loop.first %}
