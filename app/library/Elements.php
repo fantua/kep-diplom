@@ -7,12 +7,8 @@ class Elements extends Phalcon\Mvc\User\Component{
                 'caption' => 'Новини',
                 'action' => 'index'
             ),
-            'events' => array(
-                'caption' => 'Події',
-                'action' => 'index'
-            ),
-            'gallery' => array(
-                'caption' => 'Галерея',
+            'pages' => array(
+                'caption' => 'Статичні сторінки',
                 'action' => 'index'
             )
         ),
@@ -32,14 +28,6 @@ class Elements extends Phalcon\Mvc\User\Component{
             ),
             'news' => array(
                 'caption' => 'Новини',
-                'action' => 'index'
-            ),
-            'events' => array(
-                'caption' => 'Події',
-                'action' => 'index'
-            ),
-            'gallery' => array(
-                'caption' => 'Галерея',
                 'action' => 'index'
             ),
             'contacts' => array(

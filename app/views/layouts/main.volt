@@ -4,7 +4,7 @@
 
         {{ elements.getMenu() }}
 
-        <h3 class="text-muted"><img src="/img/logo.png" onclick="startGame()" id="logo"> Ivano-Frankivsk IT Students</h3>
+        <h3 class="text-muted"><!-- <img src="/img/logo.png" id="logo"> --> Diplom</h3>
     </div>
 
     <div class="row">

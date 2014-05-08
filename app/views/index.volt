@@ -30,15 +30,5 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         {{ javascript_include('js/bootstrap.min.js') }}
 
-        <script>
-            tryes = 5;
-            function startGame(){
-                tryes--;
-                if(tryes == 0){
-                    window.location = '/game';
-                }
-            }
-        </script>
-
     </body>
 </html>
