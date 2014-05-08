@@ -2,7 +2,7 @@
 
 <p style="float: right"><a href="/admin/news/add" class="btn btn-primary btn-sm" role="button">Додати новину</a></p>
 
-{% for news in page.items %}
+{% for model in page.items %}
     {% if loop.first %}
 
         <table class="table table-bordered table-hover">
@@ -18,11 +18,11 @@
     {% endif %}
 
             <tr>
-                <td>{{ news.id }}</td>
-                <td>{{ news.name }}</td>
-                <td>{{ news.date }}</td>
-                <td><a class="btn btn-toolbar" href="/admin/news/edit/{{ news.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
-                <td><a class="btn btn-toolbar" href="/admin/news/delete/{{ news.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
+                <td>{{ model.id }}</td>
+                <td>{{ model.name }}</td>
+                <td>{{ model.date }}</td>
+                <td><a class="btn btn-toolbar" href="/admin/news/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
+                <td><a class="btn btn-toolbar" href="/admin/news/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
             </tr>
 
     {% if loop.last %}

@@ -5,7 +5,7 @@
     <div class="form-group">
         <label for="name" class="control-label col-xs-2">Назва</label>
         <div class="col-xs-10">
-            <input type="name" class="form-control" id="name" name="name" placeholder="Назва" required autofocus>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Назва" required autofocus>
         </div>
     </div>
     <div class="form-group">

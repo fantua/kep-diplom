@@ -19,17 +19,17 @@ class NewsController extends ControllerBase{
             $numberPage = 1;
         }
 
-        $news = \News::find();
+        $model = \News::find();
 
         $paginator = new Model(array(
-            "data" => $news,
+            "data" => $model,
             "limit" => 5,
             "page" => $numberPage
         ));
         $page = $paginator->getPaginate();
 
         $this->view->setVar("page", $page);
-        $this->view->setVar("news", $news);
+        $this->view->setVar("model", $model);
 
     }
 
@@ -37,15 +37,15 @@ class NewsController extends ControllerBase{
 
         if($this->request->isPost()){
 
-            $news = new \News();
+            $model = new \News();
 
-            $news->name = $this->request->getPost('name', array('string', 'striptags'));
-            $news->full_content = $this->request->getPost('full_content');
-            $news->preview_content = $this->request->getPost('preview_content');
-            $news->date = time();
+            $model->name = $this->request->getPost('name', array('string', 'striptags'));
+            $model->full_content = $this->request->getPost('full_content');
+            $model->preview_content = $this->request->getPost('preview_content');
+            $model->date = time();
 
-            if (!$news->save()) {
-                foreach ($news->getMessages() as $message) {
+            if (!$model->save()) {
+                foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
                 return $this->dispatcher->forward(array(
@@ -67,9 +67,9 @@ class NewsController extends ControllerBase{
 
     public function deleteAction($id){
 
-        $news = \News::findFirstById($id);
+        $model = \News::findFirstById($id);
 
-        if (!$news) {
+        if (!$model) {
             $this->flash->error('Новина не знайдена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
@@ -78,8 +78,8 @@ class NewsController extends ControllerBase{
             ));
         }
 
-        if (!$news->delete()) {
-            foreach ($news->getMessages() as $message) {
+        if (!$model->delete()) {
+            foreach ($model->getMessages() as $message) {
                 $this->flash->error((string) $message);
             }
             return $this->dispatcher->forward(array(
@@ -100,9 +100,9 @@ class NewsController extends ControllerBase{
 
     public function editAction($id){
 
-        $news = \News::findFirstById($id);
+        $model = \News::findFirstById($id);
 
-        if (!$news) {
+        if (!$model) {
             $this->flash->error('Новина не знайдена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
@@ -113,13 +113,13 @@ class NewsController extends ControllerBase{
 
         if($this->request->isPost()){
 
-            $news->name = $this->request->getPost('name', array('string', 'striptags'));
-            $news->full_content = $this->request->getPost('full_content');
-            $news->preview_content = $this->request->getPost('preview_content');
-            $news->date = strtotime($news->date);
+            $model->name = $this->request->getPost('name', array('string', 'striptags'));
+            $model->full_content = $this->request->getPost('full_content');
+            $model->preview_content = $this->request->getPost('preview_content');
+            $model->date = strtotime($model->date);
 
-            if (!$news->save()) {
-                foreach ($news->getMessages() as $message) {
+            if (!$model->save()) {
+                foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
                 return $this->dispatcher->forward(array(
@@ -138,7 +138,7 @@ class NewsController extends ControllerBase{
 
         }
 
-        $this->view->setVar("news", $news);
+        $this->view->setVar("model", $model);
 
     }
 

@@ -1,10 +1,10 @@
-{% for news in page.items %}
+{% for model in page.items %}
     <div class="blog-post">
-        <h2 class="blog-post-title">{{ news.name }}</h2>
-        <p class="blog-post-meta">{{ news.date }}</p>
-        {{ news.preview_content }}
+        <h2 class="blog-post-title">{{ model.name }}</h2>
+        <p class="blog-post-meta">{{ model.date }}</p>
+        {{ model.preview_content }}
         <br>
-        <p><a class="btn btn-default" href="/news/view/{{ news.id }}" role="button">Читати »</a></p>
+        <p><a class="btn btn-default" href="/news/view/{{ model.id }}" role="button">Читати »</a></p>
     </div>
     <hr>
 

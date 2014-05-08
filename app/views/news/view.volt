@@ -1,10 +1,10 @@
 <div class="blog-post">
-    <h2 class="blog-post-title">{{ news.name }}</h2>
-    <p class="blog-post-meta">{{ news.date }}</p>
-    {{ news.full_content }}
+    <h2 class="blog-post-title">{{ model.name }}</h2>
+    <p class="blog-post-meta">{{ model.date }}</p>
+    {{ model.full_content }}
 
-    <meta property="og:title" content="{{ news.name }}" />
-    <meta property="og:description" content="{{ news.full_content|striptags }}" />
+    <meta property="og:title" content="{{ model.name }}" />
+    <meta property="og:description" content="{{ model.full_content|striptags }}" />
     <script type="text/javascript">(function(w,doc) {
         if (!w.__utlWdgt ) {
             w.__utlWdgt = true;

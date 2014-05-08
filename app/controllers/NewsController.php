@@ -19,24 +19,24 @@ class NewsController extends ControllerBase{
             $numberPage = 1;
         }
 
-        $news = \News::find(array('order' => 'id DESC'));
+        $model = \News::find(array('order' => 'id DESC'));
 
         $paginator = new Model(array(
-            "data" => $news,
+            "data" => $model,
             "limit" => 5,
             "page" => $numberPage
         ));
         $page = $paginator->getPaginate();
 
         $this->view->setVar("page", $page);
-        $this->view->setVar("news", $news);
+        $this->view->setVar("model", $model);
 
     }
 
     public function viewAction($id){
-        $news = \News::findFirstById($id);
+        $model = \News::findFirstById($id);
 
-        if (!$news) {
+        if (!$model) {
             $this->flash->error('Новина не знайдена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers',
@@ -45,6 +45,6 @@ class NewsController extends ControllerBase{
             ));
         }
 
-        $this->view->setVar("news", $news);
+        $this->view->setVar("model", $model);
     }
 }
