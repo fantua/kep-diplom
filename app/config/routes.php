@@ -26,6 +26,10 @@ $router->add('/admin/:controller', array(
 	'controller' => 1
 ));
 
+$router->add('/admin/', array(
+    'namespace' => 'MyApp\Controllers\Admin'
+));
+
 $router->add('/admin', array(
     'namespace' => 'MyApp\Controllers\Admin'
 ));
