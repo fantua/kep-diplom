@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="name" class="control-label col-xs-2">Назва</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Назва" value="{{ news.name }}" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Назва" value="{{ model.name }}" required>
         </div>
     </div>
     <div class="form-group">

@@ -42,7 +42,7 @@
     <div class="blog-footer">
         <p>Flappy Team for ITdeya cup.</p>
         <p>
-            <a href="#">Вверх</a>
+            <a id="up">Вверх</a>
         </p>
     </div>
 </div>

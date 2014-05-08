@@ -39,7 +39,7 @@ class PagesController extends ControllerBase{
         if($this->request->isPost()){
 
             if(!preg_match('/^[a-z0-9_-]+$/', $this->request->getPost('link'))){
-                $this->flash->error('Посилання введено невірно. Дозволені символи: a-z, -, _');
+                $this->flash->error('Посилання введено невірно. Дозволені символи: a-z, 0-9, -, _');
                 return false;
             }
 

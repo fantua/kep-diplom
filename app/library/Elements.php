@@ -70,7 +70,7 @@ class Elements extends Phalcon\Mvc\User\Component{
     public function getMenu(){
         $controller = $this->view->getControllerName();
 
-        echo '<ul class="nav nav-pills pull-right">';
+        echo '<ul id="top_menu" class="nav nav-pills pull-right">';
 
         foreach ($this->_headerMenu['pull-right'] as $key => $val){
             if($key == $controller)
