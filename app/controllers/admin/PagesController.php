@@ -124,8 +124,6 @@ class PagesController extends ControllerBase{
                 return false;
             }
 
-            $model = new \Pages();
-
             $model->name = $this->request->getPost('name', array('string', 'striptags'));
             $model->link = $this->request->getPost('link');
             $model->data = $this->request->getPost('data');
