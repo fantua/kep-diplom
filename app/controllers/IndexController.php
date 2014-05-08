@@ -13,10 +13,6 @@ class IndexController extends ControllerBase{
 
     public function indexAction(){
 
-        if ($numberPage <= 0) {
-            $numberPage = 1;
-        }
-
         $news = \News::find(array('order' => 'id DESC'));
 
         $paginator = new Model(array(

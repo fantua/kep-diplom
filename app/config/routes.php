@@ -2,6 +2,7 @@
 
 $router = new Phalcon\Mvc\Router(false);
 
+
 $router->add('/:controller/:action/:params', array(
 	'namespace' => 'MyApp\Controllers',
 	'controller' => 1,
@@ -14,6 +15,15 @@ $router->add('/:controller', array(
 	'controller' => 1
 ));
 
+// Page controller
+$router->add('/page/:params', array(
+    'namespace' => 'MyApp\Controllers',
+    'controller' => 'page',
+    'params' => 1,
+));
+
+
+/* Admin routes */
 $router->add('/admin/:controller/:action/:params', array(
 	'namespace' => 'MyApp\Controllers\Admin',
 	'controller' => 1,

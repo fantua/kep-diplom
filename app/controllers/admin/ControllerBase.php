@@ -23,7 +23,7 @@ class ControllerBase extends Controller{
     }
 
     protected function initialize(){
-        Tag::prependTitle('IFITS - ');
+        Tag::prependTitle('Diplom - ');
     }
 
 	public function afterExecuteRoute(){
