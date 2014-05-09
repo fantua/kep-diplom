@@ -11,7 +11,7 @@
 <div class="form-group">
     <label for="link" class="control-label col-xs-2">Посилання</label>
     <div class="col-xs-10">
-        <input type="text" class="form-control" id="link" name="link" placeholder="Посилання" required autofocus>
+        <input type="text" class="form-control" id="link" name="link" placeholder="Посилання" required>
     </div>
 </div>
 <div class="form-group">

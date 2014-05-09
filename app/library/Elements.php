@@ -10,6 +10,18 @@ class Elements extends Phalcon\Mvc\User\Component{
             'pages' => array(
                 'caption' => 'Статичні сторінки',
                 'action' => 'index'
+            ),
+            'teachers' => array(
+                'caption' => 'Викладачі',
+                'action' => 'index'
+            ),
+            'lessons' => array(
+                'caption' => 'Предмети',
+                'action' => 'index'
+            ),
+            'classrooms' => array(
+                'caption' => 'Аудиторії',
+                'action' => 'index'
             )
         ),
         'pull-right' => array(
