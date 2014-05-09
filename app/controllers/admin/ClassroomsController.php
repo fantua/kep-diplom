@@ -3,11 +3,11 @@ namespace MyApp\Controllers\Admin;
 use Phalcon\Tag as Tag,
     Phalcon\Paginator\Adapter\Model;
 
-class LessonsController extends ControllerBase{
+class ClassroomsController extends ControllerBase{
 
     public function initialize(){
         $this->view->setTemplateAfter('main');
-        Tag::setTitle('Предмети');
+        Tag::setTitle('Аудиторії');
         parent::initialize();
     }
 
@@ -18,7 +18,7 @@ class LessonsController extends ControllerBase{
             $numberPage = 1;
         }
 
-        $model = \Lessons::find();
+        $model = \Classrooms::find();
 
         $paginator = new Model(array(
             "data" => $model,
@@ -34,10 +34,9 @@ class LessonsController extends ControllerBase{
     public function addAction(){
         if($this->request->isPost()){
 
-            $model = new \Lessons();
+            $model = new \Classrooms();
 
             $model->name = $this->request->getPost('name', array('string', 'striptags'));
-            $model->info = $this->request->getPost('info');
 
             if (!$model->save()) {
                 foreach ($model->getMessages() as $message) {
@@ -45,15 +44,15 @@ class LessonsController extends ControllerBase{
                 }
                 return $this->dispatcher->forward(array(
                     'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'lessons',
+                    'controller' => 'classrooms',
                     'action' => 'index'
                 ));
             }
 
-            $this->flash->success('Предмет доданий');
+            $this->flash->success('Аудиторія додана');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'lessons',
+                'controller' => 'classrooms',
                 'action' => 'index'
             ));
         }
@@ -61,13 +60,13 @@ class LessonsController extends ControllerBase{
 
     public function deleteAction($id){
 
-        $model = \Lessons::findFirstById($id);
+        $model = \Classrooms::findFirstById($id);
 
         if (!$model) {
-            $this->flash->error('Предмет не знайдений');
+            $this->flash->error('Аудиторія не знайдена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'lessons',
+                'controller' => 'classrooms',
                 'action' => 'index'
             ));
         }
@@ -78,28 +77,28 @@ class LessonsController extends ControllerBase{
             }
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'lessons',
+                'controller' => 'classrooms',
                 'action' => 'index'
             ));
         }
 
-        $this->flash->success('Предмет видалений');
+        $this->flash->success('Аудиторія видалена');
         return $this->dispatcher->forward(array(
             'namespace' => 'MyApp\Controllers\Admin',
-            'controller' => 'lessons',
+            'controller' => 'classrooms',
             'action' => 'index'
         ));
 
     }
 
     public function editAction($id){
-        $model = \Lessons::findFirstById($id);
+        $model = \Classrooms::findFirstById($id);
 
         if (!$model) {
-            $this->flash->error('Предмет не знайдений');
+            $this->flash->error('Аудиторія не знайдена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'lessons',
+                'controller' => 'classrooms',
                 'action' => 'index'
             ));
         }
@@ -107,7 +106,6 @@ class LessonsController extends ControllerBase{
         if($this->request->isPost()){
 
             $model->name = $this->request->getPost('name', array('string', 'striptags'));
-            $model->info = $this->request->getPost('info');
 
             if (!$model->save()) {
                 foreach ($model->getMessages() as $message) {
@@ -115,15 +113,15 @@ class LessonsController extends ControllerBase{
                 }
                 return $this->dispatcher->forward(array(
                     'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'lessons',
+                    'controller' => 'classrooms',
                     'action' => 'index'
                 ));
             }
 
-            $this->flash->success('Предмет змінений');
+            $this->flash->success('Аудиторія змінена');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'lessons',
+                'controller' => 'classrooms',
                 'action' => 'index'
             ));
 
