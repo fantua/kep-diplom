@@ -86,6 +86,37 @@ CREATE TABLE IF NOT EXISTS `pages` (
   UNIQUE KEY `link` (`link`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+
+CREATE TABLE IF NOT EXISTS `teachers` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  firstname varchar(50) NOT NULL DEFAULT '',
+  middlename varchar(50) NOT NULL DEFAULT '',
+  lastname varchar(50) NOT NULL DEFAULT '',
+  info text NOT NULL,
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `lessons` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL DEFAULT '',
+  info text NOT NULL,
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL DEFAULT '',
+  curator int unsigned NOT NULL DEFAULT 0,
+  info text NOT NULL,
+  CONSTRAINT pkId PRIMARY KEY (id),
+  INDEX ixCurator (curator),
+  CONSTRAINT fkTariffsId FOREIGN KEY (tariff_id)
+    REFERENCES tariffs (tariff_id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
