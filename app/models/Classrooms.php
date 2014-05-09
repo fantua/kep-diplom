@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class Classrooms extends \Phalcon\Mvc\Model
 {
 
