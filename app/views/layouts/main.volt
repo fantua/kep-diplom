@@ -41,6 +41,23 @@
                         <div class="digits"></div>
                     </div>
                 </div>
+                <div id="converter" class="converter">
+                    <h6>Конвертор</h6>
+                    <select class="form-control" id="num_sys">
+                        <option selected value="zero">Система числення</option>
+                        <option value="bin">Двійкова</option>
+                        <option value="oct">Вісімкова</option>
+                        <option value="hex">Шістнадцяткова</option>
+                    </select>
+                    <div class="input-group" style="padding-top: 5px;">
+                        <input type="text" class="form-control" placeholder="Число" id="num">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                    </div>
+                    <div class="input-group" style="padding-top: 5px;">
+                        <input type="text" class="form-control" placeholder="Результат" id="result">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-ok"></span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -33,6 +33,7 @@
         {{ javascript_include('js/bootstrap.min.js') }}
         {{ javascript_include('js/scrolltop.js') }}
         {{ javascript_include('js/clock.js') }}
+        {{ javascript_include('js/converter.js') }}
 
     </body>
 </html>
