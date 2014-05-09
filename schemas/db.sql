@@ -112,10 +112,39 @@ CREATE TABLE IF NOT EXISTS `groups` (
   info text NOT NULL,
   CONSTRAINT pkId PRIMARY KEY (id),
   INDEX ixCurator (curator),
-  CONSTRAINT fkTariffsId FOREIGN KEY (tariff_id)
-    REFERENCES tariffs (tariff_id)
+  CONSTRAINT fkGroupsCuratorId FOREIGN KEY (curator)
+    REFERENCES teachers (id)
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+
+CREATE TABLE IF NOT EXISTS `classrooms` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL DEFAULT '',
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `week_types` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL DEFAULT '',
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `days` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL DEFAULT '',
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `lesson_numbers` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL DEFAULT '',
+  start_time time NOT NULL,
+  end_time time NOT NULL,
+  CONSTRAINT pkId PRIMARY KEY (id)
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
