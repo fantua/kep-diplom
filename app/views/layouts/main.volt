@@ -32,10 +32,15 @@
             </div>
             <br>
             <div class="sidebar-module" style="text-align: center">
-                <h4>Партнери</h4>
-                <img src="/img/softjourn.png">
-                <img src="/img/eleks.png">
-                <img src="/img/softserve.png">
+                <h4>Віджети</h4>
+                <div id="clock" class="light">
+                    <div class="display">
+                        <div class="weekdays"></div>
+                        <div class="ampm"></div>
+                        <div class="alarm"></div>
+                        <div class="digits"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
