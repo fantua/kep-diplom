@@ -32,7 +32,33 @@ class TeachersController extends ControllerBase{
     }
 
     public function addAction(){
+        if($this->request->isPost()){
 
+            $model = new \Teachers();
+
+            $model->firstname = $this->request->getPost('firstname', array('string', 'striptags'));
+            $model->middlename = $this->request->getPost('middlename', array('string', 'striptags'));
+            $model->lastname = $this->request->getPost('lastname', array('string', 'striptags'));
+            $model->info = $this->request->getPost('info');
+
+            if (!$model->save()) {
+                foreach ($model->getMessages() as $message) {
+                    $this->flash->error((string) $message);
+                }
+                return $this->dispatcher->forward(array(
+                    'namespace' => 'MyApp\Controllers\Admin',
+                    'controller' => 'teachers',
+                    'action' => 'index'
+                ));
+            }
+
+            $this->flash->success('Викладач доданий');
+            return $this->dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers\Admin',
+                'controller' => 'teachers',
+                'action' => 'index'
+            ));
+        }
     }
 
     public function editAction($id){
