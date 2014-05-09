@@ -61,8 +61,79 @@ class TeachersController extends ControllerBase{
         }
     }
 
-    public function editAction($id){
+    public function deleteAction($id){
 
+        $model = \Teachers::findFirstById($id);
+
+        if (!$model) {
+            $this->flash->error('Викладач не знайдений');
+            return $this->dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers\Admin',
+                'controller' => 'teachers',
+                'action' => 'index'
+            ));
+        }
+
+        if (!$model->delete()) {
+            foreach ($model->getMessages() as $message) {
+                $this->flash->error((string) $message);
+            }
+            return $this->dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers\Admin',
+                'controller' => 'teachers',
+                'action' => 'index'
+            ));
+        }
+
+        $this->flash->success('Викладач видалений');
+        return $this->dispatcher->forward(array(
+            'namespace' => 'MyApp\Controllers\Admin',
+            'controller' => 'teachers',
+            'action' => 'index'
+        ));
+
+    }
+
+    public function editAction($id){
+        $model = \Teachers::findFirstById($id);
+
+        if (!$model) {
+            $this->flash->error('Викладач не знайдений');
+            return $this->dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers\Admin',
+                'controller' => 'teachers',
+                'action' => 'index'
+            ));
+        }
+
+        if($this->request->isPost()){
+
+            $model->firstname = $this->request->getPost('firstname', array('string', 'striptags'));
+            $model->middlename = $this->request->getPost('middlename', array('string', 'striptags'));
+            $model->lastname = $this->request->getPost('lastname', array('string', 'striptags'));
+            $model->info = $this->request->getPost('info');
+
+            if (!$model->save()) {
+                foreach ($model->getMessages() as $message) {
+                    $this->flash->error((string) $message);
+                }
+                return $this->dispatcher->forward(array(
+                    'namespace' => 'MyApp\Controllers\Admin',
+                    'controller' => 'teachers',
+                    'action' => 'index'
+                ));
+            }
+
+            $this->flash->success('Викладач змінений');
+            return $this->dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers\Admin',
+                'controller' => 'teachers',
+                'action' => 'index'
+            ));
+
+        }
+
+        $this->view->setVar("model", $model);
     }
 
 }
