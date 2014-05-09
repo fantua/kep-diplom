@@ -3,11 +3,11 @@ namespace MyApp\Controllers\Admin;
 use Phalcon\Tag as Tag,
     Phalcon\Paginator\Adapter\Model;
 
-class TeachersController extends ControllerBase{
+class LessonsController extends ControllerBase{
 
     public function initialize(){
         $this->view->setTemplateAfter('main');
-        Tag::setTitle('Викладачі');
+        Tag::setTitle('Новини');
         parent::initialize();
     }
 
@@ -18,7 +18,7 @@ class TeachersController extends ControllerBase{
             $numberPage = 1;
         }
 
-        $model = \Teachers::find();
+        $model = \Lessons::find();
 
         $paginator = new Model(array(
             "data" => $model,
@@ -34,11 +34,9 @@ class TeachersController extends ControllerBase{
     public function addAction(){
         if($this->request->isPost()){
 
-            $model = new \Teachers();
+            $model = new \Lessons();
 
-            $model->firstname = $this->request->getPost('firstname', array('string', 'striptags'));
-            $model->middlename = $this->request->getPost('middlename', array('string', 'striptags'));
-            $model->lastname = $this->request->getPost('lastname', array('string', 'striptags'));
+            $model->name = $this->request->getPost('name', array('string', 'striptags'));
             $model->info = $this->request->getPost('info');
 
             if (!$model->save()) {
@@ -47,15 +45,15 @@ class TeachersController extends ControllerBase{
                 }
                 return $this->dispatcher->forward(array(
                     'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'teachers',
+                    'controller' => 'lessons',
                     'action' => 'index'
                 ));
             }
 
-            $this->flash->success('Викладач доданий');
+            $this->flash->success('Предмет доданий');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'teachers',
+                'controller' => 'lessons',
                 'action' => 'index'
             ));
         }
@@ -63,13 +61,13 @@ class TeachersController extends ControllerBase{
 
     public function deleteAction($id){
 
-        $model = \Teachers::findFirstById($id);
+        $model = \Lessons::findFirstById($id);
 
         if (!$model) {
-            $this->flash->error('Викладач не знайдений');
+            $this->flash->error('Предмет не знайдений');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'teachers',
+                'controller' => 'lessons',
                 'action' => 'index'
             ));
         }
@@ -80,37 +78,35 @@ class TeachersController extends ControllerBase{
             }
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'teachers',
+                'controller' => 'lessons',
                 'action' => 'index'
             ));
         }
 
-        $this->flash->success('Викладач видалений');
+        $this->flash->success('Предмет видалений');
         return $this->dispatcher->forward(array(
             'namespace' => 'MyApp\Controllers\Admin',
-            'controller' => 'teachers',
+            'controller' => 'lessons',
             'action' => 'index'
         ));
 
     }
 
     public function editAction($id){
-        $model = \Teachers::findFirstById($id);
+        $model = \Lessons::findFirstById($id);
 
         if (!$model) {
-            $this->flash->error('Викладач не знайдений');
+            $this->flash->error('Предмет не знайдений');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'teachers',
+                'controller' => 'lessons',
                 'action' => 'index'
             ));
         }
 
         if($this->request->isPost()){
 
-            $model->firstname = $this->request->getPost('firstname', array('string', 'striptags'));
-            $model->middlename = $this->request->getPost('middlename', array('string', 'striptags'));
-            $model->lastname = $this->request->getPost('lastname', array('string', 'striptags'));
+            $model->name = $this->request->getPost('name', array('string', 'striptags'));
             $model->info = $this->request->getPost('info');
 
             if (!$model->save()) {
@@ -119,15 +115,15 @@ class TeachersController extends ControllerBase{
                 }
                 return $this->dispatcher->forward(array(
                     'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'teachers',
+                    'controller' => 'lessons',
                     'action' => 'index'
                 ));
             }
 
-            $this->flash->success('Викладач змінений');
+            $this->flash->success('Предмет змінений');
             return $this->dispatcher->forward(array(
                 'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'teachers',
+                'controller' => 'lessons',
                 'action' => 'index'
             ));
 
