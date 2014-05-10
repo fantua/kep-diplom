@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class Groups extends \Phalcon\Mvc\Model
 {
 
