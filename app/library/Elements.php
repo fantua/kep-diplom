@@ -22,6 +22,14 @@ class Elements extends Phalcon\Mvc\User\Component{
             'classrooms' => array(
                 'caption' => 'Аудиторії',
                 'action' => 'index'
+            ),
+            'groups' => array(
+                'caption' => 'Групи',
+                'action' => 'index'
+            ),
+            'timetable' => array(
+                'caption' => 'Розклад',
+                'action' => 'index'
             )
         ),
         'pull-right' => array(
