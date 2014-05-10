@@ -5,6 +5,12 @@ use Phalcon\Tag as Tag,
 
 class TimetableController extends ControllerBase{
 
+    public function initialize(){
+        $this->view->setTemplateAfter('main');
+        Tag::setTitle('Розклад');
+        parent::initialize();
+    }
+
     public function indexAction(){
 
     }
