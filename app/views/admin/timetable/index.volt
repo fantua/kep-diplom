@@ -53,24 +53,11 @@
         </td>
         <td style="vertical-align: middle;">{{ model.weekTypes.name }}</td>
         <td style="vertical-align: middle;">{{ model.classrooms.name }}</td>
-        <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/edit/"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
-        <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/delete/" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
+        <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
+        <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
     </tr>
 
     {% if loop.last %}
-    <!--
-        <tr>
-            <td colspan="6">
-                <ul class="pager" style="margin: 0px;">
-                    <li class="previous">{{ link_to("admin/timetable/index", '&larr; Перша') }}</li>
-                <li>{{ link_to("admin/timetable/index?page=" ~ page.before, 'Попередня') }}</li>
-                <span> {{ page.current }} / {{ page.total_pages }} </span>
-                <li>{{ link_to("admin/timetable/index?page=" ~ page.next, 'Наступна') }}</li>
-                <li class="next">{{ link_to("admin/timetable/index?page=" ~ page.last, 'Остання &rarr;') }}</li>
-            </ul>
-        </td>
-    </tr>
--->
     </tbody>
 </table>
 

@@ -129,7 +129,9 @@ class Elements extends Phalcon\Mvc\User\Component{
         }
 
         echo '</select>';
-        echo '<input type="hidden" name="day" value="'.$this->timetable['day'].'">';
+
+        if(!empty($this->timetable['day']))
+            echo '<input type="hidden" name="day" value="'.$this->timetable['day'].'">';
     }
 
 }
