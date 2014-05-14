@@ -15,9 +15,9 @@
         <tr>
             <td style="border: none;">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="/groups">Інформація</a></li>
+                    <li><a href="/groups">Інформація</a></li>
                     <li><a href="/groups/timetable">Розклад</a></li>
-                    <li><a href="/groups/lessons">Предмети</a></li>
+                    <li class="active"><a href="/groups/lessons">Предмети</a></li>
                 </ul>
             </td>
         </tr>
@@ -27,19 +27,35 @@
 { % for model in page.items %}
 { % if loop.first %}
 
-<table class="table table-hover">
+<table class="table table-striped table-hover" style="text-align: center;">
     <thead>
-    <tr>
-        <th colspan="2" style="border: none;">
-            <div class="alert alert-info">
-                 Куратор: <a href="#" class="alert-link">ПІБ</a>
-            </div>
-        </th>
-    </tr>
+        <tr>
+            <th style="text-align: center;">№</th>
+            <th style="text-align: center;">Предмет</th>
+        </tr>
     </thead>
-    <!--<tbody>
-    </tbody>-->
+    <tbody>
     { % endif %}
+        <tr >
+            <td>1</td>
+            <td><a href="#">Схемотехніка</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><a href="#">Схемотехніка</a></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><a href="#">Схемотехніка</a></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><a href="#">Схемотехніка</a></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><a href="#">Схемотехніка</a></td>
+        </tr>
 
     { % if loop.last %}
 
@@ -55,10 +71,10 @@
         </td>
     </tr> -->
 
-
+    </tbody>
 </table>
 
 { % endif %}
 { % else %}
-Груп немає
+Предметів немає
 { % endfor %}

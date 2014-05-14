@@ -12,14 +12,14 @@ class GroupsController extends ControllerBase{
     }
 
     public function indexAction(){
-
+        $this->elements->timetable = ['group' => 1];
     }
 
     public function lessonsAction(){
-
+        $this->elements->timetable = ['group' => 1];
     }
 
     public function timetableAction(){
-
+        $this->elements->timetable = ['group' => 1];
     }
 }
