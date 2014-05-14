@@ -1,4 +1,4 @@
-{{ flash.output() }}
+{{ content() }}
 
 <p style="float: right"><a href="/admin/groups/add" class="btn btn-primary btn-sm" role="button">Додати групу</a></p>
 

@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 {{ form('admin/lessons/add', 'class': 'form-horizontal', 'role': 'form') }}
 

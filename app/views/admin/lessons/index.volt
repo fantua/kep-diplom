@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <p style="float: right"><a href="/admin/lessons/add" class="btn btn-primary btn-sm" role="button">Додати предмет</a></p>
 

@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <p style="float: right"><a href="/admin/pages/add" class="btn btn-primary btn-sm" role="button">Додати сторінку</a></p>
 

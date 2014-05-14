@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <p style="float: right"><a href="/admin/news/add" class="btn btn-primary btn-sm" role="button">Додати новину</a></p>
 

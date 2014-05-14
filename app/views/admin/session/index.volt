@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <style>
     body {

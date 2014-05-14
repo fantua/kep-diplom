@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <p style="float: right"><a href="/admin/classrooms/add" class="btn btn-primary btn-sm" role="button">Додати аудиторію</a></p>
 

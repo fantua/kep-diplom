@@ -1,4 +1,4 @@
-{{ content() }}
+{{ flash.output() }}
 
 <form class="form-horizontal" role="form" method="post" action="/admin/groups/edit/{{ model.id }}">
 
