@@ -1,6 +1,8 @@
 <?php
 class Elements extends Phalcon\Mvc\User\Component{
 
+    public $timetable = array();
+
     private $_adminHeaderMenu = array(
         'pull-left' => array(
             'news' => array(
@@ -103,6 +105,31 @@ class Elements extends Phalcon\Mvc\User\Component{
 
         echo '</ul>';
 
+    }
+
+    public function getDaysPills(){
+        $model = \Days::find();
+
+        echo '<ul class="nav nav-pills">';
+
+        foreach($model as $val){
+            echo '<li '.(($val->id == $this->timetable['day']) ? 'class="active"' : '').'><a href="?day='.$val->id.'&group='.$this->timetable['group'].'">'.$val->name.'</a></li>';
+        }
+
+        echo '</ul>';
+    }
+
+    public function getGroupsOptions(){
+        $model = \Groups::find();
+
+        echo '<select class="form-control" name="group" onchange="submit();">';
+
+        foreach($model as $val){
+            echo '<option '.(($val->id == $this->timetable['group']) ? 'selected' : '').' value="'.$val->id.'">'.$val->name.'</option>';
+        }
+
+        echo '</select>';
+        echo '<input type="hidden" name="day" value="'.$this->timetable['day'].'">';
     }
 
 }

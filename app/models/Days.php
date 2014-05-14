@@ -1,5 +1,5 @@
 <?php
-class Classrooms extends \Phalcon\Mvc\Model
+class Days extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -15,7 +15,7 @@ class Classrooms extends \Phalcon\Mvc\Model
     public $name;
      
     /**
-     * @return Classrooms[]
+     * @return Days[]
      */
     public static function find($parameters = array())
     {
@@ -23,7 +23,7 @@ class Classrooms extends \Phalcon\Mvc\Model
     }
 
     /**
-     * @return Classrooms
+     * @return Days
      */
     public static function findFirst($parameters = array())
     {
@@ -43,7 +43,7 @@ class Classrooms extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany("id", "Timetables", "classroom_id");
+        $this->hasMany("id", "Timetables", "day_id");
     }
 
 }

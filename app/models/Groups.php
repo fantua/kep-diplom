@@ -56,4 +56,10 @@ class Groups extends \Phalcon\Mvc\Model
         );
     }
 
+    public function initialize()
+    {
+        $this->belongsTo("curator", "Teachers", "id");
+        $this->hasMany("id", "Timetables", "group_id");
+    }
+
 }

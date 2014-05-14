@@ -35,4 +35,22 @@ class ControllerBase extends Controller{
 		$this->view->setViewsDir($viewsDir . 'admin/');
 	}
 
+    protected function forward($controller, $action = 'index', $namespace = 'MyApp\Controllers\Admin'){
+        return $this->dispatcher->forward(array(
+            'namespace' => $namespace,
+            'controller' => $controller,
+            'action' => $action
+        ));
+    }
+
+    protected function redirect($controller, $action = 'index', $admin = true){
+        $base = ($admin) ? 'admin/' : '';
+
+        return $this->response->redirect(
+            $base.
+            $controller.'/'.
+            $action
+        );
+    }
+
 }

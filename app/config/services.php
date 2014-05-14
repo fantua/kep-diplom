@@ -6,7 +6,7 @@ use Phalcon\DI\FactoryDefault,
 	Phalcon\Mvc\Url as UrlResolver,
 	Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter,
 	Phalcon\Mvc\View\Engine\Volt as VoltEngine,
-	Phalcon\Mvc\Model\Metadata\Memory as    MetaDataAdapter,
+	Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter,
 	Phalcon\Session\Adapter\Files as SessionAdapter;
 
 /**
@@ -90,7 +90,7 @@ $di->set('dispatcher', function(){
 });
 
 $di->set('flash', function(){
-    return new Phalcon\Flash\Direct(array(
+    return new Phalcon\Flash\Session(array(
         'error' => 'alert alert-warning',
         'success' => 'alert alert-success',
         'notice' => 'alert alert-info',

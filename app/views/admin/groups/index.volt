@@ -11,7 +11,6 @@
         <th>id</th>
         <th>Назва</th>
         <th>Куратор</th>
-        <th>Інформація</th>
         <th colspan="3">Змінити</th>
     </tr>
     </thead>
@@ -21,8 +20,7 @@
     <tr>
         <td>{{ model.id }}</td>
         <td>{{ model.name }}</td>
-        <td>{{ model.curator }}</td>
-        <td>{{ model.info }}</td>
+        <td>{{ model.teachers.firstname }} {{ model.teachers.middlename }} {{ model.teachers.lastname }}</td>
         <td><a class="btn btn-toolbar" href="/admin/groups/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
         <td><a class="btn btn-toolbar" href="/admin/groups/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
         <td><a class="btn btn-toolbar" href="/groups/{{ model.id }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>
@@ -31,7 +29,7 @@
     {% if loop.last %}
 
     <tr>
-        <td colspan="7">
+        <td colspan="6">
             <ul class="pager" style="margin: 0px;">
                 <li class="previous">{{ link_to("admin/groups/index", '&larr; Перша') }}</li>
                 <li>{{ link_to("admin/groups/index?page=" ~ page.before, 'Попередня') }}</li>

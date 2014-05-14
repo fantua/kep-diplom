@@ -146,6 +146,56 @@ CREATE TABLE IF NOT EXISTS `lesson_numbers` (
   CONSTRAINT pkId PRIMARY KEY (id)
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS `timetables` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  group_id int unsigned NOT NULL DEFAULT 0,
+  day_id int unsigned NOT NULL DEFAULT 0,
+  lesson_number_id int unsigned NOT NULL DEFAULT 0,
+  lesson_id int unsigned NOT NULL DEFAULT 0,
+  week_type_id int unsigned NOT NULL DEFAULT 0,
+  classroom_id int unsigned NOT NULL DEFAULT 0,
+  CONSTRAINT pkId PRIMARY KEY (id),
+  INDEX ixGroupId (group_id),
+  INDEX ixDayId (day_id),
+  INDEX ixLessonNumberId (lesson_number_id),
+  INDEX ixLessonId (lesson_id),
+  INDEX ixWeekTypeId (week_type_id),
+  INDEX ixClassroomId (classroom_id),
+  CONSTRAINT fkGroupsGrouId FOREIGN KEY (group_id)
+    REFERENCES groups (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsDayId FOREIGN KEY (day_id)
+    REFERENCES days (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsLessonNumberId FOREIGN KEY (lesson_number_id)
+    REFERENCES lesson_numbers (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsLessonId FOREIGN KEY (lesson_id)
+    REFERENCES lessons (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsWeekTypeId FOREIGN KEY (week_type_id)
+    REFERENCES week_types (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsClassroomId FOREIGN KEY (classroom_id)
+    REFERENCES classrooms (id)
+      ON DELETE CASCADE
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `timetable_teachers` (
+  id int unsigned NOT NULL AUTO_INCREMENT,
+  timetable_id int unsigned NOT NULL DEFAULT 0,
+  teacher_id int unsigned NOT NULL DEFAULT 0,
+  CONSTRAINT pkId PRIMARY KEY (id),
+  INDEX ixTimetableId (timetable_id),
+  INDEX ixTeacherId (teacher_id),
+  CONSTRAINT fkGroupsTimetableId FOREIGN KEY (timetable_id)
+    REFERENCES timetables (id)
+      ON DELETE CASCADE,
+  CONSTRAINT fkGroupsTeacherId FOREIGN KEY (teacher_id)
+    REFERENCES teachers (id)
+      ON DELETE CASCADE
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --

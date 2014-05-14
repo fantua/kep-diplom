@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 class Lessons extends \Phalcon\Mvc\Model
 {
 
@@ -50,6 +46,11 @@ class Lessons extends \Phalcon\Mvc\Model
             'name' => 'name', 
             'info' => 'info'
         );
+    }
+
+    public function initialize()
+    {
+        $this->hasMany("id", "Timetables", "lesson_id");
     }
 
 }

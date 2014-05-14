@@ -12,7 +12,15 @@
     <label for="curator" class="control-label col-xs-2">Куратор</label>
     <div class="col-xs-10">
         <select class="form-control" id="curator" name="curator">
-            <option selected value="0">Немає викладачів</option>
+
+            {% for teacher in model %}
+
+            <option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>
+
+            {% else %}
+                <option value="0">Немає викладачів</option>
+            {% endfor %}
+
         </select>
     </div>
 </div>
