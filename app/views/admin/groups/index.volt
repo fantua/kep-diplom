@@ -20,10 +20,10 @@
     <tr>
         <td>{{ model.id }}</td>
         <td>{{ model.name }}</td>
-        <td>{{ model.teachers.firstname }} {{ model.teachers.middlename }} {{ model.teachers.lastname }}</td>
+        <td>{{ model.teachers.lastname }} {{ model.teachers.firstname }} {{ model.teachers.middlename }}</td>
         <td><a class="btn btn-toolbar" href="/admin/groups/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
         <td><a class="btn btn-toolbar" href="/admin/groups/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
-        <td><a class="btn btn-toolbar" href="/groups/{{ model.id }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>
+        <td><a class="btn btn-toolbar" href="/groups/index?id={{ model.id }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>
     </tr>
 
     {% if loop.last %}

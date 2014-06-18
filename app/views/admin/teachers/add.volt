@@ -3,15 +3,15 @@
 {{ form('admin/teachers/add', 'class': 'form-horizontal', 'role': 'form') }}
 
 <div class="form-group">
-    <label for="firstname" class="control-label col-xs-2">Ім'я</label>
+    <label for="lastname" class="control-label col-xs-2">Прізвище</label>
     <div class="col-xs-10">
-        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ім'я" required autofocus>
+        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Прізвище" required autofocus>
     </div>
 </div>
 <div class="form-group">
-    <label for="lastname" class="control-label col-xs-2">Прізвище</label>
+    <label for="firstname" class="control-label col-xs-2">Ім'я</label>
     <div class="col-xs-10">
-        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Прізвище" required>
+        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ім'я" required>
     </div>
 </div>
 <div class="form-group">

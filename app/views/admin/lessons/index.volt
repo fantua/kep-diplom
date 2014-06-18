@@ -22,7 +22,7 @@
         <td>{{ model.name }}</td>
         <td><a class="btn btn-toolbar" href="/admin/lessons/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
         <td><a class="btn btn-toolbar" href="/admin/lessons/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
-        <td><a class="btn btn-toolbar" href="/lessons/{{ model.id }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>
+        <td><a class="btn btn-toolbar" href="/lessons/index?id={{ model.id }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>
     </tr>
 
     {% if loop.last %}

@@ -23,7 +23,7 @@ class ControllerBase extends Controller{
     }
 
     protected function initialize(){
-        Tag::prependTitle('Diplom - ');
+        Tag::prependTitle('СІ КЕП - Адміністрування - ');
     }
 
 	public function afterExecuteRoute(){

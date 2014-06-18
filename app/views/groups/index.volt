@@ -1,64 +1,27 @@
 {{ flash.output() }}
 
 <center>
-    <table class="table" style="width: 435px;">
-        <tr>
-            <td style="border: none; text-align: right;">
-                <form method="get">
-                    <div class="input-group" style="width: 435px;">
-                        <span class="input-group-addon">Група</span>
-                        {{ elements.getGroupsOptions() }}
-                    </div>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td style="border: none;">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="/groups">Інформація</a></li>
-                    <li><a href="/groups/timetable">Розклад</a></li>
-                    <li><a href="/groups/lessons">Предмети</a></li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <form method="get">
+        <div class="input-group" style="width: 435px;">
+            <span class="input-group-addon">Група</span>
+            {{ elements.getGroupsOptions() }}
+        </div>
+    </form>
 </center>
+<br>
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="/groups/index?id={{ model.id }}">Інформація</a></li>
+        <li><a href="/groups/lessons?id={{ model.id }}">Предмети</a></li>
+        <li><a href="/groups/timetable?id={{ model.id }}">Розклад</a></li>
+    </ul>
+    <br>
 
-{ % for model in page.items %}
-{ % if loop.first %}
+    <div class="alert alert-info">
+         Куратор: <a href="/teachers/index?id={{ model.teachers.id }}" class="alert-link">{{ model.teachers.lastname }} {{ model.teachers.firstname }} {{ model.teachers.middlename }}</a>
+    </div>
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th colspan="2" style="border: none;">
-            <div class="alert alert-info">
-                 Куратор: <a href="#" class="alert-link">ПІБ</a>
-            </div>
-        </th>
-    </tr>
-    </thead>
-    <!--<tbody>
-    </tbody>-->
-    { % endif %}
+    <br>
 
-    { % if loop.last %}
-
-    <!--<tr>
-        <td colspan="6">
-            <ul class="pager" style="margin: 0px;">
-                <li class="previous">{{ link_to("admin/groups/index", '&larr; Перша') }}</li>
-                <li>{{ link_to("admin/groups/index?page=" ~ page.before, 'Попередня') }}</li>
-                <span> {{ page.current }} / {{ page.total_pages }} </span>
-                <li>{{ link_to("admin/groups/index?page=" ~ page.next, 'Наступна') }}</li>
-                <li class="next">{{ link_to("admin/groups/index?page=" ~ page.last, 'Остання &rarr;') }}</li>
-            </ul>
-        </td>
-    </tr> -->
-
-
-</table>
-
-{ % endif %}
-{ % else %}
-Груп немає
-{ % endfor %}
+    {{ model.info }}
+</div>

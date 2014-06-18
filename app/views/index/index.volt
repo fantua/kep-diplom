@@ -1,6 +1,6 @@
 {% for news in page.items %}
 <div class="blog-post">
-    <h2 class="blog-post-title"><a href="/news/view/{{ news.id }}" style="color: black;">{{ news.name }}</a></h2>
+    <h2 class="blog-post-title">{{ news.name }}</h2>
     <p class="blog-post-meta">{{ news.date }}</p>
     {{ news.preview_content }}
     <br>

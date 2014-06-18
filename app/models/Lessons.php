@@ -51,6 +51,7 @@ class Lessons extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->hasMany("id", "Timetables", "lesson_id");
+        $this->hasMany("id", "LessonsFiles", "lesson_id");
     }
 
 }

@@ -44,6 +44,7 @@ class WeekTypes extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->hasMany("id", "Timetables", "week_type_id");
+        $this->hasMany("id", "TimetableWeekTypes", "week_type_id");
     }
 
 }

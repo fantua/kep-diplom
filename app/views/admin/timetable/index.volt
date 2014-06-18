@@ -9,7 +9,7 @@
                 <form method="get">
                     <div class="input-group" style="width: 435px;">
                         <span class="input-group-addon">Група</span>
-                        {{ elements.getGroupsOptions() }}
+                        {{ elements.getAdminGroupsOptions() }}
                     </div>
                 </form>
             </td>
@@ -51,17 +51,24 @@
             Даних немає
             {% endfor %}
         </td>
-        <td style="vertical-align: middle;">{{ model.weekTypes.name }}</td>
+        <td style="vertical-align: middle;">
+            {% for type in model.timetableWeekTypes %}
+            {{ type.weekTypes.name }}{% if !loop.last %},{% endif %}
+            {% endfor %}
+        </td>
         <td style="vertical-align: middle;">{{ model.classrooms.name }}</td>
         <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
         <td style="vertical-align: middle;"><a class="btn btn-toolbar" href="/admin/timetable/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
     </tr>
 
-    {% if loop.last %}
+<!--
+    { % if loop.last %}
     </tbody>
 </table>
 
-{% endif %}
+    { % endif %}
+
+-->
 {% else %}
 Даних немає
 {% endfor %}

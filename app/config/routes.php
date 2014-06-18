@@ -2,6 +2,7 @@
 
 $router = new Phalcon\Mvc\Router(false);
 
+$router->removeExtraSlashes(true);
 
 $router->add('/:controller/:action/:params', array(
 	'namespace' => 'MyApp\Controllers',
@@ -34,10 +35,6 @@ $router->add('/admin/:controller/:action/:params', array(
 $router->add('/admin/:controller', array(
 	'namespace' => 'MyApp\Controllers\Admin',
 	'controller' => 1
-));
-
-$router->add('/admin/', array(
-    'namespace' => 'MyApp\Controllers\Admin'
 ));
 
 $router->add('/admin', array(

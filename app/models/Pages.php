@@ -1,4 +1,5 @@
 <?php
+use \Phalcon\Validation\Message;
 
 class Pages extends \Phalcon\Mvc\Model
 {
@@ -54,6 +55,17 @@ class Pages extends \Phalcon\Mvc\Model
             'link' => 'link', 
             'data' => 'data'
         );
+    }
+
+    public function validation(){
+
+        if(empty($this->link) || Pages::findFirst(array('conditions' => 'link = ?1 AND id != ?2', 'bind' => array(1 => $this->link, 2 => $this->id)))){
+            $this->appendMessage(new Message('Таке посилання вже існує'));
+
+            return false;
+        }
+
+        return $this->validationHasFailed() != true;
     }
 
 }

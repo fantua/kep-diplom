@@ -1,4 +1,5 @@
 <?php
+use \Phalcon\Validation\Message;
 
 class Groups extends \Phalcon\Mvc\Model
 {
@@ -58,8 +59,19 @@ class Groups extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->belongsTo("curator", "Teachers", "id");
+        $this->hasOne("curator", "Teachers", "id");
         $this->hasMany("id", "Timetables", "group_id");
+    }
+
+    public function validation(){
+
+        if(empty($this->curator) || !Teachers::findFirstById($this->curator) || Groups::findFirst(array('conditions' => 'curator = ?1 AND id != ?2', 'bind' => array(1 => $this->curator, 2 => $this->id)))){
+            $this->appendMessage(new Message('Помилка валідації'));
+
+            return false;
+        }
+
+        return $this->validationHasFailed() != true;
     }
 
 }

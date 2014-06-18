@@ -1,7 +1,6 @@
 <?php
 namespace MyApp\Controllers\Admin;
-use Phalcon\Tag as Tag,
-    Phalcon\Paginator\Adapter\Model;
+use Phalcon\Tag as Tag;
 
 class ClassroomsController extends ControllerBase{
 
@@ -12,23 +11,19 @@ class ClassroomsController extends ControllerBase{
     }
 
     public function indexAction(){
-        $numberPage = $this->request->getQuery("page", "int");
+        $numberPage = $this->request->getQuery('page', 'int', 1);
 
-        if ($numberPage <= 0) {
-            $numberPage = 1;
-        }
+        $model = \Classrooms::find(['order' => 'name']);
 
-        $model = \Classrooms::find();
-
-        $paginator = new Model(array(
-            "data" => $model,
-            "limit" => 10,
-            "page" => $numberPage
+        $paginator = new \Paginator(array(
+            'data' => $model,
+            'limit' => 10,
+            'page' => $numberPage
         ));
         $page = $paginator->getPaginate();
 
-        $this->view->setVar("page", $page);
-        $this->view->setVar("model", $model);
+        $this->view->setVar('page', $page);
+        $this->view->setVar('model', $model);
     }
 
     public function addAction(){
@@ -36,25 +31,17 @@ class ClassroomsController extends ControllerBase{
 
             $model = new \Classrooms();
 
-            $model->name = $this->request->getPost('name', array('string', 'striptags'));
+            $model->name = $this->request->getPost('name', array('string', 'striptags', 'trim'));
 
             if (!$model->save()) {
                 foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-                return $this->dispatcher->forward(array(
-                    'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'classrooms',
-                    'action' => 'index'
-                ));
+                return $this->redirect('classrooms', 'add');
             }
 
             $this->flash->success('Аудиторія додана');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'classrooms',
-                'action' => 'index'
-            ));
+            return $this->redirect('classrooms');
         }
     }
 
@@ -64,30 +51,18 @@ class ClassroomsController extends ControllerBase{
 
         if (!$model) {
             $this->flash->error('Аудиторія не знайдена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'classrooms',
-                'action' => 'index'
-            ));
+            return $this->redirect('classrooms');
         }
 
         if (!$model->delete()) {
             foreach ($model->getMessages() as $message) {
                 $this->flash->error((string) $message);
             }
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'classrooms',
-                'action' => 'index'
-            ));
+            return $this->redirect('classrooms');
         }
 
         $this->flash->success('Аудиторія видалена');
-        return $this->dispatcher->forward(array(
-            'namespace' => 'MyApp\Controllers\Admin',
-            'controller' => 'classrooms',
-            'action' => 'index'
-        ));
+        return $this->redirect('classrooms');
 
     }
 
@@ -96,38 +71,26 @@ class ClassroomsController extends ControllerBase{
 
         if (!$model) {
             $this->flash->error('Аудиторія не знайдена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'classrooms',
-                'action' => 'index'
-            ));
+            return $this->redirect('classrooms');
         }
 
         if($this->request->isPost()){
 
-            $model->name = $this->request->getPost('name', array('string', 'striptags'));
+            $model->name = $this->request->getPost('name', array('string', 'striptags', 'trim'));
 
             if (!$model->save()) {
                 foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-                return $this->dispatcher->forward(array(
-                    'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'classrooms',
-                    'action' => 'index'
-                ));
+                return $this->redirect('classrooms', 'edit/'.$id);
             }
 
             $this->flash->success('Аудиторія змінена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'classrooms',
-                'action' => 'index'
-            ));
+            return $this->redirect('classrooms');
 
         }
 
-        $this->view->setVar("model", $model);
+        $this->view->setVar('model', $model);
     }
 
 }

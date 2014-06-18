@@ -9,10 +9,6 @@ class Elements extends Phalcon\Mvc\User\Component{
                 'caption' => 'Новини',
                 'action' => 'index'
             ),
-            'pages' => array(
-                'caption' => 'Статичні сторінки',
-                'action' => 'index'
-            ),
             'teachers' => array(
                 'caption' => 'Викладачі',
                 'action' => 'index'
@@ -31,6 +27,18 @@ class Elements extends Phalcon\Mvc\User\Component{
             ),
             'timetable' => array(
                 'caption' => 'Розклад',
+                'action' => 'index'
+            ),
+            'files' => array(
+                'caption' => 'Файли',
+                'action' => 'index'
+            ),
+            'pages' => array(
+                'caption' => 'Статичні сторінки',
+                'action' => 'index'
+            ),
+            'settings' => array(
+                'caption' => 'Налаштування',
                 'action' => 'index'
             )
         ),
@@ -52,9 +60,21 @@ class Elements extends Phalcon\Mvc\User\Component{
                 'caption' => 'Новини',
                 'action' => 'index'
             ),
-            'contacts' => array(
-                'caption' => 'Контакти',
+            'teachers' => array(
+                'caption' => 'Викладачі',
                 'action' => 'index'
+            ),
+            'lessons' => array(
+                'caption' => 'Предмети',
+                'action' => 'index'
+            ),
+            'groups' => array(
+                'caption' => 'Групи',
+                'action' => 'index'
+            ),
+            'page' => array(
+                'caption' => 'Контакти',
+                'action' => 'contacts'
             )
         )
     );
@@ -119,7 +139,7 @@ class Elements extends Phalcon\Mvc\User\Component{
         echo '</ul>';
     }
 
-    public function getGroupsOptions(){
+    public function getAdminGroupsOptions(){
         $model = \Groups::find();
 
         echo '<select class="form-control" name="group" onchange="submit();">';
@@ -132,6 +152,56 @@ class Elements extends Phalcon\Mvc\User\Component{
 
         if(!empty($this->timetable['day']))
             echo '<input type="hidden" name="day" value="'.$this->timetable['day'].'">';
+    }
+
+    public function getGroupsOptions(){
+        $model = \Groups::find();
+
+        echo '<select class="form-control" name="id" onchange="submit();">';
+
+        foreach($model as $val){
+            echo '<option '.(($val->id == $this->timetable['id']) ? 'selected' : '').' value="'.$val->id.'">'.$val->name.'</option>';
+        }
+
+        echo '</select>';
+    }
+
+    public function  getWeekTypes(){
+        $model = \WeekTypes::find();
+
+        echo '<select class="form-control" name="type" onchange="submit();">';
+
+        foreach($model as $val){
+            echo '<option '.(($val->id == $this->timetable['weekType']) ? 'selected' : '').' value="'.$val->id.'">'.$val->name.'</option>';
+        }
+
+        echo '</select>';
+
+        echo '<input type="hidden" name="id" value="'.$this->timetable['id'].'">';
+    }
+
+    public function getTeachersOptions(){
+        $model = \Teachers::find(['order' => 'lastname, firstname']);
+
+        echo '<select class="form-control" name="id" onchange="submit();">';
+
+        foreach($model as $val){
+            echo '<option '.(($val->id == $this->timetable['id']) ? 'selected' : '').' value="'.$val->id.'">'.$val->lastname.' '.$val->firstname.' '.$val->middlename.'</option>';
+        }
+
+        echo '</select>';
+    }
+
+    public function getLessonsOptions(){
+        $model = \Lessons::find(['order' => 'name']);
+
+        echo '<select class="form-control" name="id" onchange="submit();">';
+
+        foreach($model as $val){
+            echo '<option '.(($val->id == $this->timetable['id']) ? 'selected' : '').' value="'.$val->id.'">'.$val->name.'</option>';
+        }
+
+        echo '</select>';
     }
 
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace MyApp\Controllers\Admin;
 use Phalcon\Tag as Tag;
 

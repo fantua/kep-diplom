@@ -15,7 +15,7 @@
 
             {% for teacher in model %}
 
-            <option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>
+            <option value="{{ teacher.id }}">{{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.middlename }}</option>
 
             {% else %}
                 <option value="0">Немає викладачів</option>

@@ -74,7 +74,7 @@
 
                 {% for teacher in model['teachers'] %}
 
-                <option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>
+                <option value="{{ teacher.id }}">{{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.middlename }}</option>
 
                 {% else %}
                 <option value="0">Немає данних</option>
@@ -84,22 +84,15 @@
         </label>
         <a class="btn" onclick="addTeacher()"><i class="glyphicon glyphicon-plus"></i></a>
     </div>
-
 </div>
 <div class="form-group">
-    <label for="weekType" class="control-label col-xs-2">Тип тижня</label>
+    <label for="weekTypes" class="control-label col-xs-2">Тип тижня</label>
     <div class="col-xs-10">
-        <select class="form-control" id="weekType" name="weekType">
-
-            {% for type in model['types'] %}
-
-            <option value="{{ type.id }}">{{ type.name }}</option>
-
-            {% else %}
-            <option value="0">Немає данних</option>
-            {% endfor %}
-
-        </select>
+        {% for type in model['types'] %}
+        <label><input type="checkbox" class="form-control" id="weekTypes[]" name="weekTypes[]" value="{{ type.id }}">{{ type.name }} тиждень</label>
+        {% else %}
+        <label>Немає данних</label>
+        {% endfor %}
     </div>
 </div>
 <div class="form-group">
@@ -126,75 +119,29 @@
 </form>
 
 <script>
-    function addTeacher(){
-        var content = '<div class="teachers"><label class="control-label col-xs-2"></label>' +
-                    '<div class="col-xs-10" style="margin-bottom: 10px">' +
-                        '<label style="width: 95%; font-weight: inherit;">' +
-                            '<select class="form-control" name="teachers[]">' +
-                            {% for teacher in model['teachers'] %}
-                            '<option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>' +
-                            {% else %}
-                            '<option value="0">Немає данних</option>' +
-                            {% endfor %}
-                            '</select>' +
-                        '</label>' +
-                        '<a class="btn test" onclick="deleteTeacher(this)"><i class="glyphicon glyphicon-minus"></i></a>' +
-                    '</div></div>';
-
-        if($('div').hasClass('teachers')){
-            $( ".teachers:last" ).after(content);
-        }else{
-            $( "#teacherFirst" ).after(content);
-        }
-    }
-
-    function deleteTeacher(element){
-        jQuery(element).closest('.teachers').remove();
-    }
-
-    function dump(obj) {
-        var out = '';
-        for (var i in obj) {
-            out += i + ": " + obj[i] + "\n";
-        }
-
-        alert(out);
-
-        // or, if you wanted to avoid alerts...
-
-        var pre = document.createElement('pre');
-        pre.innerHTML = out;
-        document.body.appendChild(pre)
-    }
-
-    function addElement(){
-        var last = $('#data_' + i);
-        i++;
-
-        last.after(
-                '<div><label class="control-label col-xs-2" id="lab_' + i + '"></label>' +
-                        '<div class="col-xs-10" id="data_' + i + '">' +
-                        '<select class="form-control" id="teachers[' + i + ']" name="teachers[' + i + ']">' +
-
+function addTeacher(){
+    var content = '<div class="teachers"><label class="control-label col-xs-2"></label>' +
+                '<div class="col-xs-10" style="margin-bottom: 10px">' +
+                    '<label style="width: 95%; font-weight: inherit;">' +
+                        '<select class="form-control" name="teachers[]">' +
                         {% for teacher in model['teachers'] %}
-
-                        '<option value="{{ teacher.id }}">{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>' +
-
+                        '<option value="{{ teacher.id }}">{{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.middlename }}</option>' +
                         {% else %}
                         '<option value="0">Немає данних</option>' +
                         {% endfor %}
-
                         '</select>' +
-                        '<a class="btn" onclick="deleteElement(' + i + ')" id="test"><i class="glyphicon glyphicon-minus"></i></a>' +
-                        '</div></div>'
-        );
-    }
+                    '</label>' +
+                    '<a class="btn test" onclick="deleteTeacher(this)"><i class="glyphicon glyphicon-minus"></i></a>' +
+                '</div></div>';
 
-    function deleteElement(n){
-        $('#lab_' + n).remove();
-        $('#data_' + n).remove();
-
-        if(i == n)
-            i--;
+    if($('div').hasClass('teachers')){
+        $(".teachers:last").after(content);
+    }else{
+        $("#teacherFirst").after(content);
     }
+}
+
+function deleteTeacher(element){
+    jQuery(element).closest('.teachers').remove();
+}
 </script>

@@ -44,6 +44,6 @@
         </table>
 
     {% endif %}
-    {% else %}
-        Новин немає
-    {% endfor %}
+{% else %}
+    Новин немає
+{% endfor %}

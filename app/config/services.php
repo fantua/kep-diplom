@@ -4,6 +4,8 @@ use Phalcon\DI\FactoryDefault,
 	Phalcon\Mvc\View,
 	Phalcon\Mvc\Dispatcher,
 	Phalcon\Mvc\Url as UrlResolver,
+    Phalcon\Mvc\Model\Manager as Manager,
+    Phalcon\Events\Manager as EventsManager,
 	Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter,
 	Phalcon\Mvc\View\Engine\Volt as VoltEngine,
 	Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter,
@@ -72,7 +74,7 @@ $di->set('db', function() use ($config) {
  */
 $di->set('modelsMetadata', function() use ($config) {
 	return new MetaDataAdapter();
-});
+}, true);
 
 /**
  * Start the session the first time some component request the session service
@@ -81,11 +83,46 @@ $di->set('session', function() {
 	$session = new SessionAdapter();
 	$session->start();
 	return $session;
-});
+}, true);
 
 $di->set('dispatcher', function(){
+
+    //Create an EventsManager
+    $eventsManager = new EventsManager();
+
+    //Attach a listener
+    $eventsManager->attach("dispatch:beforeException", function($event, $dispatcher, $exception) {
+
+        //Handle 404 exceptions
+        if ($exception instanceof DispatchException) {
+            $dispatcher->forward(array(
+                'namespace' => 'MyApp\Controllers',
+                'controller' => 'error',
+                'action' => 'index'
+            ));
+            return false;
+        }
+
+        //Alternative way, controller or action doesn't exist
+        if ($event->getType() == 'beforeException') {
+            switch ($exception->getCode()) {
+                case \Phalcon\Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                case \Phalcon\Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                    $dispatcher->forward(array(
+                        'namespace' => 'MyApp\Controllers',
+                        'controller' => 'error',
+                        'action' => 'index'
+                    ));
+                    return false;
+            }
+        }
+    });
+
 	$dispatcher = new Dispatcher();
+
+    $dispatcher->setEventsManager($eventsManager);
 	$dispatcher->setDefaultNamespace('MyApp\Controllers');
+
 	return $dispatcher;
 });
 
@@ -99,4 +136,12 @@ $di->set('flash', function(){
 
 $di->set('elements', function(){
     return new Elements();
+});
+
+$di->set('modelsManager', function() {
+    return new Manager();
+});
+
+$di->set('helper', function(){
+    return new Helper();
 });

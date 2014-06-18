@@ -20,7 +20,7 @@
     <tr>
         <td>{{ model.id }}</td>
         <td>{{ model.name }}</td>
-        <td>{{ model.link }}</td>
+        <td>/page/{{ model.link }}</td>
         <td><a class="btn btn-toolbar" href="/admin/pages/edit/{{ model.id }}"><i class="glyphicon glyphicon-pencil"></i> Редагувати</a></td>
         <td><a class="btn btn-toolbar" href="/admin/pages/delete/{{ model.id }}" style="color: #d9534f"><i class="glyphicon glyphicon-remove"></i> Видалити</a></td>
         <td><a class="btn btn-toolbar" href="/page/{{ model.link }}" target="_blank"><i class="glyphicon glyphicon-eye-open"></i> Переглянути</a></td>

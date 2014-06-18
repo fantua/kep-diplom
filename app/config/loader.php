@@ -16,5 +16,6 @@ $loader->registerDirs(
         $config->application->pluginsDir,
         $config->application->libraryDir,
         $config->application->modelsDir,
+        $config->application->helpersDir,
     )
 )->register();

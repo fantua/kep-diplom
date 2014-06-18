@@ -1,8 +1,7 @@
 <?php
 
 namespace MyApp\Controllers\Admin;
-use Phalcon\Tag as Tag,
-    Phalcon\Paginator\Adapter\Model;
+use Phalcon\Tag as Tag;
 
 class PagesController extends ControllerBase{
 
@@ -13,24 +12,19 @@ class PagesController extends ControllerBase{
     }
 
     public function indexAction(){
-
-        $numberPage = $this->request->getQuery("page", "int");
-
-        if ($numberPage <= 0) {
-            $numberPage = 1;
-        }
+        $numberPage = $this->request->getQuery('page', 'int', 1);
 
         $model = \Pages::find();
 
-        $paginator = new Model(array(
-            "data" => $model,
-            "limit" => 10,
-            "page" => $numberPage
+        $paginator = new \Paginator(array(
+            'data' => $model,
+            'limit' => 10,
+            'page' => $numberPage
         ));
         $page = $paginator->getPaginate();
 
-        $this->view->setVar("page", $page);
-        $this->view->setVar("model", $model);
+        $this->view->setVar('page', $page);
+        $this->view->setVar('model', $model);
 
     }
 
@@ -53,20 +47,12 @@ class PagesController extends ControllerBase{
                 foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-                return $this->dispatcher->forward(array(
-                    'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'pages',
-                    'action' => 'index'
-                ));
+                return $this->redirect('pages', 'add');
             }
 
             $this->flash->success('Сторінка додана');
 
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'pages',
-                'action' => 'index'
-            ));
+            return $this->redirect('pages');
         }
 
     }
@@ -77,30 +63,18 @@ class PagesController extends ControllerBase{
 
         if (!$model) {
             $this->flash->error('Сторінка не знайдена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'pages',
-                'action' => 'index'
-            ));
+            return $this->redirect('pages');
         }
 
         if (!$model->delete()) {
             foreach ($model->getMessages() as $message) {
                 $this->flash->error((string) $message);
             }
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'pages',
-                'action' => 'index'
-            ));
+            return $this->redirect('pages');
         }
 
         $this->flash->success('Сторінка видалена');
-        return $this->dispatcher->forward(array(
-            'namespace' => 'MyApp\Controllers\Admin',
-            'controller' => 'pages',
-            'action' => 'index'
-        ));
+        return $this->redirect('pages');
 
     }
 
@@ -110,11 +84,7 @@ class PagesController extends ControllerBase{
 
         if (!$model) {
             $this->flash->error('Сторінка не знайдена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'pages',
-                'action' => 'index'
-            ));
+            return $this->redirect('pages');
         }
 
         if($this->request->isPost()){
@@ -132,23 +102,15 @@ class PagesController extends ControllerBase{
                 foreach ($model->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-                return $this->dispatcher->forward(array(
-                    'namespace' => 'MyApp\Controllers\Admin',
-                    'controller' => 'pages',
-                    'action' => 'index'
-                ));
+                return $this->redirect('pages', 'edit/'.$id);
             }
 
             $this->flash->success('Сторінка змінена');
-            return $this->dispatcher->forward(array(
-                'namespace' => 'MyApp\Controllers\Admin',
-                'controller' => 'pages',
-                'action' => 'index'
-            ));
+            return $this->redirect('pages');
 
         }
 
-        $this->view->setVar("model", $model);
+        $this->view->setVar('model', $model);
 
     }
 

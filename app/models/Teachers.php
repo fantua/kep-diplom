@@ -65,7 +65,7 @@ class Teachers extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany("id", "Groups", "curator", array(
+        $this->hasOne("id", "Groups", "curator", array(
             "foreignKey" => array(
                 "message" => "Викладач не може бути видалений, тому що він є куратором"
             )

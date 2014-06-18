@@ -1,7 +1,6 @@
 <?php
 namespace MyApp\Controllers;
-use Phalcon\Tag as Tag,
-    Phalcon\Paginator\Adapter\Model;
+use Phalcon\Tag as Tag;
 
 class NewsController extends ControllerBase{
 
@@ -12,24 +11,19 @@ class NewsController extends ControllerBase{
     }
 
     public function indexAction(){
-
-        $numberPage = $this->request->getQuery("page", "int");
-
-        if ($numberPage <= 0) {
-            $numberPage = 1;
-        }
+        $numberPage = $this->request->getQuery('page', 'int', 1);
 
         $model = \News::find(array('order' => 'id DESC'));
 
-        $paginator = new Model(array(
-            "data" => $model,
-            "limit" => 5,
-            "page" => $numberPage
+        $paginator = new \Paginator(array(
+            'data' => $model,
+            'limit' => 10,
+            'page' => $numberPage
         ));
         $page = $paginator->getPaginate();
 
-        $this->view->setVar("page", $page);
-        $this->view->setVar("model", $model);
+        $this->view->setVar('page', $page);
+        $this->view->setVar('model', $model);
 
     }
 
@@ -45,6 +39,6 @@ class NewsController extends ControllerBase{
             ));
         }
 
-        $this->view->setVar("model", $model);
+        $this->view->setVar('model', $model);
     }
 }

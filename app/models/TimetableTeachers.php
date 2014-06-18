@@ -58,7 +58,7 @@ class TimetableTeachers extends \Phalcon\Mvc\Model
 
     public function validation(){
 
-        if(empty($this->teacher_id) || !Teachers::findFirst($this->teacher_id)){
+        if(empty($this->teacher_id) || !Teachers::findFirstById($this->teacher_id)){
             $this->appendMessage(new Message('Помилка валідації'));
 
             return false;

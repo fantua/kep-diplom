@@ -1,7 +1,6 @@
 <?php
 namespace MyApp\Controllers;
-use Phalcon\Tag as Tag,
-    Phalcon\Paginator\Adapter\Model;
+use Phalcon\Tag as Tag;
 
 class PageController extends ControllerBase{
 
@@ -24,7 +23,7 @@ class PageController extends ControllerBase{
 
         Tag::appendTitle($model->name);
 
-        $this->view->setVar("model", $model);
+        $this->view->setVar('model', $model);
 
     }
 }

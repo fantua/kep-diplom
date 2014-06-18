@@ -3,15 +3,15 @@
 <form class="form-horizontal" role="form" method="post" action="/admin/teachers/edit/{{ model.id }}">
 
     <div class="form-group">
-        <label for="firstname" class="control-label col-xs-2">Ім'я</label>
+        <label for="lastname" class="control-label col-xs-2">Прізвище</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ім'я" value="{{ model.firstname }}" required autofocus>
+            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Прізвище" required value="{{ model.lastname }}" autofocus>
         </div>
     </div>
     <div class="form-group">
-        <label for="lastname" class="control-label col-xs-2">Прізвище</label>
+        <label for="firstname" class="control-label col-xs-2">Ім'я</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Прізвище" required value="{{ model.lastname }}">
+            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Ім'я" value="{{ model.firstname }}" required>
         </div>
     </div>
     <div class="form-group">

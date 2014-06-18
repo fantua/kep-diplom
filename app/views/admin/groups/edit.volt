@@ -15,7 +15,7 @@
 
                 {% for teacher in teachers %}
 
-                <option value="{{ teacher.id }}" {% if teacher.id == model.curator %}selected{% endif %}>{{ teacher.firstname }} {{ teacher.middlename }} {{ teacher.lastname }}</option>
+                <option value="{{ teacher.id }}" {% if teacher.id == model.curator %}selected{% endif %}>{{ teacher.lastname }} {{ teacher.firstname }} {{ teacher.middlename }}</option>
 
                 {% else %}
                 <option value="0">Немає викладачів</option>

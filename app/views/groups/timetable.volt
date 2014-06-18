@@ -1,37 +1,31 @@
 {{ flash.output() }}
 
+<form method="get">
+    <div class="input-group" style="width: 155px; float: right">
+        <span class="input-group-addon">Тип тижня</span>
+        {{ elements.getWeekTypes() }}
+    </div>
+</form>
 <center>
-    <table class="table" style="width: 435px;">
-        <tr>
-            <td style="border: none; text-align: right;">
-                <form method="get">
-                    <div class="input-group" style="width: 435px;">
-                        <span class="input-group-addon">Група</span>
-                        {{ elements.getGroupsOptions() }}
-                    </div>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td style="border: none;">
-                <ul class="nav nav-tabs">
-                    <li><a href="/groups">Інформація</a></li>
-                    <li class="active"><a href="/groups/timetable">Розклад</a></li>
-                    <li><a href="/groups/lessons">Предмети</a></li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <form method="get">
+        <div class="input-group" style="width: 435px;">
+            <span class="input-group-addon">Група</span>
+            {{ elements.getGroupsOptions() }}
+        </div>
+    </form>
 </center>
-
-{ % for model in page.items %}
-{ % if loop.first %}
-
-    <table class="table table-bordered table-striped table-hover" style="text-align: center;">
+<br>
+<div>
+    <ul class="nav nav-tabs">
+        <li><a href="/groups/index?id={{ model.id }}">Інформація</a></li>
+        <li><a href="/groups/lessons?id={{ model.id }}">Предмети</a></li>
+        <li class="active"><a href="/groups/timetable?id={{ model.id }}">Розклад</a></li>
+    </ul>
+    <br>
+    {% for i in lessons %}
+    {% if loop.first %}
+    <table class="table table-bordered" style="text-align: center;">
         <thead>
-        <tr>
-            <th style="text-align: center;" colspan="5">Чисельник</th>
-        </tr>
         <tr>
             <th style="text-align: center;">Понеділок</th>
             <th style="text-align: center;">Вівторок</th>
@@ -41,135 +35,39 @@
         </tr>
         </thead>
         <tbody>
-        { % endif %}
+    {% endif %}
         <tr>
-            <td>
-                <ul class="list-group">
-                    <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
+            {% for day in ['1': 'monday', '2': 'tuesday', '3': 'wednesday', '4': 'thursday', '5': "friday"] %}
+            {% if data[day][i] is defined %}
+            <td style="border-bottom: none; border-top: none;">
+                <ul class="list-group" style="margin: 0px;">
+                    <li class="list-group-item" style="text-align: left">
+                        <table>
+                            <tr>
+                                <td style="vertical-align: top;"><?=$data[$day][$i]->lessonNumbers->name?>.&nbsp;</td>
+                                <td><?=$data[$day][$i]->lessons->name?> <br>
+                                    <? foreach($data[$day][$i]->timetableTeachers as $timetableTeacher){ ?>
+                                    <a href="/teachers/index?id={{ timetableTeacher.teachers.id }}"><span style="padding-left: 5px;">{{ timetableTeacher.teachers.lastname }} {{ helper.cutName(timetableTeacher.teachers.firstname) }}. {{ helper.cutName(timetableTeacher.teachers.middlename) }}.</span></a> <br>
+                                    <? } ?>
+                                </td>
+                            </tr>
+                        </table>
+                        <p style="text-align: right; margin: 0px;font-size: 12px;"><?=$data[$day][$i]->classrooms->name?></p>
+                    </li>
                 </ul>
             </td>
-            <td>
-                <ul class="list-group">
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item"></li>
-                </ul>
-            </td>
-            <td>
-                <ul class="list-group">
-                    <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-                </ul>
-            </td>
-            <td>
-                <ul class="list-group">
-                    <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-                </ul>
-            </td>
-            <td>
-                <ul class="list-group">
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item"></li>
-                    <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                    <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-                </ul>
-            </td>
+            {% else %}
+            <td style="border-bottom: none; border-top: none; height: 115px;"></td>
+            {% endif %}
+            {% endfor %}
         </tr>
-
-
-        { % if loop.last %}
-
-        <!--<tr>
-            <td colspan="6">
-                <ul class="pager" style="margin: 0px;">
-                    <li class="previous">{{ link_to("admin/groups/index", '&larr; Перша') }}</li>
-                    <li>{{ link_to("admin/groups/index?page=" ~ page.before, 'Попередня') }}</li>
-                    <span> {{ page.current }} / {{ page.total_pages }} </span>
-                    <li>{{ link_to("admin/groups/index?page=" ~ page.next, 'Наступна') }}</li>
-                    <li class="next">{{ link_to("admin/groups/index?page=" ~ page.last, 'Остання &rarr;') }}</li>
-                </ul>
-            </td>
-        </tr> -->
-
+    <!--{ % if loop.last %}
         </tbody>
     </table>
-
-{ % for model in page.items %}
-{ % if loop.first %}
-
-<table class="table table-bordered table-striped table-hover" style="text-align: center;">
-    <thead>
-    <tr>
-        <th style="text-align: center;" colspan="5">Знаменник</th>
-    </tr>
-    <tr>
-        <th style="text-align: center;">Понеділок</th>
-        <th style="text-align: center;">Вівторок</th>
-        <th style="text-align: center;">Середа</th>
-        <th style="text-align: center;">Четвер</th>
-        <th style="text-align: center;">П'ятниця</th>
-    </tr>
-    </thead>
-    <tbody>
-    { % endif %}
-    <tr>
-        <td>
-            <ul class="list-group">
-                <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-            </ul>
-        </td>
-        <td>
-            <ul class="list-group">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"></li>
-                <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item"></li>
-            </ul>
-        </td>
-        <td>
-            <ul class="list-group">
-                <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item"></li>
-                <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-            </ul>
-        </td>
-        <td>
-            <ul class="list-group">
-                <li class="list-group-item">1. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">2. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-            </ul>
-        </td>
-        <td>
-            <ul class="list-group">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"></li>
-                <li class="list-group-item">3. Схемотехніка (ПІБ), 301</li>
-                <li class="list-group-item">4. Схемотехніка (ПІБ), 301</li>
-            </ul>
-        </td>
-    </tr>
-
-    { % if loop.last %}
-
-    </tbody>
+    { % endif %} -->
+    {% else %}
+        Даних немає
+    {% endfor %}
+        </tbody>
     </table>
-
-{ % endif %}
-{ % else %}
-Предметів немає
-{ % endfor %}
+</div>
